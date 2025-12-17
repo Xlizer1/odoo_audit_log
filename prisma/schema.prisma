@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Log {
+  id          Int      @id @default(autoincrement())
+  odooId      Int
+  model       String
+  record      String
+  type        String
+  author      String
+  body        String
+  details     String?
+  resId       Int? 
+  createdAt   DateTime @default(now())
+  actionTime  DateTime
+
+  @@unique([odooId, model])
+  @@index([actionTime])
+}
